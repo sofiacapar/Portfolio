@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sofia CAPAR | Portfolio BTS SIO SISR - Systèmes, Réseaux & Cybersécurité</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome pour les icônes techniques -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Configuration Tailwind personnalisée -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            850: '#151e32',
+                            900: '#0f172a',
+                            950: '#090d16',
+                        },
+                        cyber: {
+                            cyan: '#06b6d4',
+                            emerald: '#10b981',
+                            indigo: '#6366f1',
+                            amber: '#f59e0b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Styles personnalisés pour l'arrière-plan grille et les barres de défilement */
+        body {
+            background-color: #090d16;
+            color: #f8fafc;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.08) 0%, transparent 45%),
+                linear-gradient(to right, rgba(30, 41, 59, 0.25) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(30, 41, 59, 0.25) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+        }
+
+        /* Effet Glassmorphism */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.6);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.55) 0%, rgba(15, 23, 42, 0.85) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(71, 85, 105, 0.45);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 12px 30px -10px rgba(6, 182, 212, 0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
+        }
+
+        /* Animation d'apparition des cartes */
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.97) translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        .animate-card {
+            animation: fadeInScale 0.35s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-cyan-500/30 selection:text-cyan-200 overflow-x-hidden">
+
+    <!-- ==================== NAVIGATION FIXE ==================== -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <!-- Logo / Identité -->
+                <a href="#accueil" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-mono font-bold text-lg shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                        SC
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-100 tracking-tight text-base sm:text-lg block leading-none">Sofia CAPAR</span>
+                        <span class="font-mono text-xs text-cyan-400">BTS SIO • Option SISR</span>
+                    </div>
+                </a>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+                    <a href="#accueil" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors">Accueil</a>
+                    <a href="#apropos" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors">À propos & Compétences</a>
+                    <a href="#tableau-synthese" class="px-3.5 py-2 rounded-lg text-sm font-medium text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors">
+                        <i class="fa-solid fa-table mr-1.5 text-xs"></i>Tableau E5 / E6
+                    </a>
+                    <a href="#projets" class="px-3.5 py-2 rounded-lg text-sm font-medium text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 hover:bg-cyan-500/20 transition-colors">
+                        <i class="fa-solid fa-server mr-1.5 text-xs"></i>Projets & Réalisations
+                    </a>
+                    <a href="#parcours" class="px-3.5 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-slate-800/60 transition-colors">Parcours & Veille</a>
+                    <a href="#contact" class="ml-2 px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 shadow-md shadow-cyan-500/20 transition-all">
+                        Me contacter
+                    </a>
+                </nav>
+
+                <!-- Bouton Menu Mobile -->
+                <button id="mobile-menu-btn" aria-label="Ouvrir le menu" class="md:hidden p-2.5 rounded-xl bg-slate-800/80 text-slate-300 hover:text-white border border-slate-700">
+                    <i class="fa-solid fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Mobile Déroulant -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-slate-800 px-4 pt-3 pb-5 space-y-2">
+            <a href="#accueil" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Accueil</a>
+            <a href="#apropos" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">À propos & Compétences</a>
+            <a href="#tableau-synthese" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-emerald-400 bg-emerald-500/10">Tableau de Synthèse E5/E6</a>
+            <a href="#projets" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-cyan-400 bg-cyan-500/10">Projets & Réalisations</a>
+            <a href="#parcours" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800">Parcours & Veille</a>
+            <a href="#contact" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-sm font-semibold text-center bg-cyan-600 text-white mt-2">Me contacter</a>
+        </div>
+    </header>
+
+    <!-- ==================== SECTION HERO / ACCUEIL (Sans terminal) ==================== -->
+    <section id="accueil" class="relative pt-32 pb-16 md:pt-44 md:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="max-w-4xl mx-auto text-center space-y-8">
+            <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs sm:text-sm font-mono shadow-lg shadow-cyan-500/10">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Lycée Robert Schuman • Metz • Promotion BTS SIO 2025–2027</span>
+            </div>
+
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-tight">
+                Administratrice <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">
+                    Systèmes, Réseaux & Cybersécurité
+                </span>
+            </h1>
+
+            <p class="text-slate-300 text-base sm:text-xl max-w-3xl mx-auto leading-relaxed">
+                Bonjour, je suis <strong class="text-white font-semibold">Sofia CAPAR</strong>, étudiante en <strong class="text-cyan-400 font-medium">BTS SIO option SISR</strong>. Passionnée par l'architecture des réseaux sécurisés, la haute disponibilité, l'administration Active Directory et le support infrastructure.
+            </p>
+
+            <!-- Boutons d'action -->
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                <a href="#tableau-synthese" class="px-7 py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-400 hover:to-cyan-500 text-white font-semibold text-sm sm:text-base shadow-lg shadow-emerald-500/25 flex items-center gap-2.5 transition-all">
+                    <i class="fa-solid fa-table"></i>
+                    <span>Consulter le Tableau de Synthèse E5/E6</span>
+                </a>
+                <a href="#projets" class="px-7 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 hover:border-cyan-500/50 font-medium text-sm sm:text-base flex items-center gap-2.5 transition-all">
+                    <i class="fa-solid fa-server text-cyan-400"></i>
+                    <span>Voir mes réalisations techniques</span>
+                </a>
+            </div>
+
+            <!-- Indicateurs clés -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-slate-800 max-w-4xl mx-auto">
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-bold text-white font-mono">2025-27</div>
+                    <div class="text-xs text-slate-400 mt-1">Promotion BTS SIO</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-bold text-cyan-400 font-mono">SISR</div>
+                    <div class="text-xs text-slate-400 mt-1">Infra & Réseaux</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-bold text-emerald-400 font-mono">10+</div>
+                    <div class="text-xs text-slate-400 mt-1">Projets & TP Référencés</div>
+                </div>
+                <div class="glass-card rounded-2xl p-4">
+                    <div class="text-2xl sm:text-3xl font-bold text-indigo-400 font-mono">Metz</div>
+                    <div class="text-xs text-slate-400 mt-1">Lycée Robert Schuman</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION À PROPOS & COMPÉTENCES ==================== -->
+    <section id="apropos" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="max-w-3xl mb-12">
+            <span class="font-mono text-xs uppercase tracking-widest text-cyan-400 font-semibold">01 // Profil & Savoir-Faire</span>
+            <h2 class="text-2xl sm:text-4xl font-bold text-white mt-2">Architecture, Sécurité & Administration</h2>
+            <p class="text-slate-400 mt-3 text-sm sm:text-base leading-relaxed">
+                Au sein du BTS SIO option SISR au Lycée Robert Schuman de Metz, je développe une expertise complète en administration des infrastructures : déploiement Active Directory, commutation/routage Cisco & HP, virtualisation Hyper-V, gestion de parc et maintenance curative.
+            </p>
+        </div>
+
+        <!-- Grille des 4 pôles de compétences -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Pôle 1 -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-xl mb-5">
+                    <i class="fa-brands fa-windows"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Systèmes & Active Directory</h3>
+                <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                    Déploiement Windows Server, annuaire AD DS multi-sites, DNS, GPO, délégation AGDLP et automatisation PowerShell.
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-300 font-mono text-xs">Windows Server</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-300 font-mono text-xs">AD DS / DNS</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-cyan-300 font-mono text-xs">PowerShell</span>
+                </div>
+            </div>
+
+            <!-- Pôle 2 -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-xl mb-5">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Réseaux & Commutation</h3>
+                <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                    Segmentation VLAN 802.1Q, liens Trunk, routage inter-VLAN Router-on-a-Stick et agrégation de liens LACP.
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-indigo-300 font-mono text-xs">Cisco IOS</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-indigo-300 font-mono text-xs">Switch HP</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-indigo-300 font-mono text-xs">VLAN / Trunk</span>
+                </div>
+            </div>
+
+            <!-- Pôle 3 -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-xl mb-5">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Haute Disponibilité & Sécurité</h3>
+                <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                    Redondance HSRP, prévention de boucles STP/RSTP, filtrage par ACL étendues et durcissement SSH/HTTPS.
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-300 font-mono text-xs">HSRP</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-300 font-mono text-xs">STP / RSTP</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-emerald-300 font-mono text-xs">ACL Étendues</span>
+                </div>
+            </div>
+
+            <!-- Pôle 4 -->
+            <div class="glass-card rounded-2xl p-6">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-400 text-xl mb-5">
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2">Support, ERP & Maintenance</h3>
+                <p class="text-slate-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                    Gestion de tickets SAV, ERP Dolibarr, OCS Inventory, GLPI, nettoyage PC et réparation de smartphones.
+                </p>
+                <div class="flex flex-wrap gap-1.5">
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-amber-300 font-mono text-xs">Dolibarr / ERP</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-amber-300 font-mono text-xs">GLPI / OCS</span>
+                    <span class="px-2.5 py-1 rounded-md bg-slate-800 text-amber-300 font-mono text-xs">SAV & Hardware</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION TABLEAU OFFICIEL DE SYNTHÈSE E5 / E6 ==================== -->
+    <section id="tableau-synthese" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="max-w-3xl mb-10">
+            <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold">02 // Référentiel BTS SIO E5 / E6</span>
+            <h2 class="text-2xl sm:text-4xl font-bold text-white mt-2">Tableau Officiel de Synthèse des Compétences</h2>
+            <p class="text-slate-400 mt-2 text-sm sm:text-base">
+                Ce tableau officiel présente la correspondance entre mes réalisations (projets de laboratoire, TP et expériences professionnelles) et les 6 grandes compétences terminales du BTS SIO option SISR.
+            </p>
+        </div>
+
+        <!-- Filtres pour le tableau -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-slate-900/80 p-4 rounded-2xl border border-slate-800">
+            <div class="flex items-center gap-2 text-xs font-mono text-slate-300">
+                <i class="fa-solid fa-filter text-emerald-400"></i>
+                <span>Filtrer par compétence du référentiel :</span>
+            </div>
+            <div id="table-filters" class="flex flex-wrap gap-2">
+                <button data-comp="all" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-emerald-500 text-slate-950 transition-all">Toutes (C1 à C6)</button>
+                <button data-comp="C1" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C1 : Patrimoine</button>
+                <button data-comp="C2" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C2 : Incidents</button>
+                <button data-comp="C3" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C3 : Présence en ligne</button>
+                <button data-comp="C4" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C4 : Mode Projet</button>
+                <button data-comp="C5" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C5 : Services</button>
+                <button data-comp="C6" class="table-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium bg-slate-800 text-slate-300 hover:text-white transition-all">C6 : Pro. Pro</button>
+            </div>
+        </div>
+
+        <!-- Conteneur Tableau Responsive -->
+        <div class="glass-panel rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+            <div class="overflow-x-auto">
+                <table id="synthesis-table" class="w-full text-left border-collapse text-xs sm:text-sm">
+                    <thead>
+                        <tr class="bg-slate-950/90 border-b border-slate-800 text-slate-300 font-mono">
+                            <th class="p-4 font-semibold w-1/4">Réalisation / Projet / Expérience</th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Gérer le patrimoine informatique">C1<br><span class="text-[10px] text-slate-400">Patrimoine</span></th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Répondre aux incidents et aux demandes d'assistance">C2<br><span class="text-[10px] text-slate-400">Incidents</span></th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Développer la présence en ligne de l'organisation">C3<br><span class="text-[10px] text-slate-400">Présence</span></th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Travailler en mode projet">C4<br><span class="text-[10px] text-slate-400">Projet</span></th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Mettre à disposition des utilisateurs un service informatique">C5<br><span class="text-[10px] text-slate-400">Service</span></th>
+                            <th class="p-4 font-semibold text-center w-[12%] border-l border-slate-800" title="Organiser son développement professionnel">C6<br><span class="text-[10px] text-slate-400">Pro. Pro</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="synthesis-table-body" class="divide-y divide-slate-800/80 text-slate-300">
+                        <!-- Injecté dynamiquement par JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="px-4 py-3 bg-slate-950/80 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+                <span>Légende : <i class="fa-solid fa-circle-check text-emerald-400 mx-1"></i> Compétence validée / mise en œuvre</span>
+                <span>Référentiel BTS SIO 2025–2027</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SECTION PROJETS & RÉALISATIONS (Projets 1 à 7, 21, 22, Dolibarr, SAV, etc.) ==================== -->
+    <section id="projets" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+            <div>
+                <span class="font-mono text-xs uppercase tracking-widest text-cyan-400 font-semibold">03 // Dossier Technique & Comptes-rendus</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-white mt-2">Projets de Laboratoire & Expériences Professionnelles</h2>
+                <p class="text-slate-400 mt-2 text-sm sm:text-base max-w-2xl">
+                    Consultez l'ensemble de mes travaux pratiques, de mes projets d'infrastructure (Projet 1 à 7, 21, 22) ainsi que mes expériences de maintenance (Dolibarr, SAV, smartphones, PC). Cliquez sur <strong class="text-cyan-300">« Voir le détail / Compte-rendu »</strong>.
+                </p>
+            </div>
+
+            <!-- Compteur dynamique -->
+            <div class="font-mono text-xs text-slate-400 bg-slate-900/90 px-4 py-2.5 rounded-xl border border-slate-800 self-start lg:self-auto">
+                Affichage : <span id="project-count" class="text-cyan-400 font-bold">10</span> / 10 réalisations
+            </div>
+        </div>
+
+        <!-- Barre de Filtres -->
+        <div id="filter-container" class="flex flex-wrap gap-2.5 mb-10">
+            <button data-filter="all" class="filter-btn active px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25 transition-all">
+                <i class="fa-solid fa-layer-group mr-1.5"></i>Tous les projets (10)
+            </button>
+            <button data-filter="systemes" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:border-cyan-500/50 hover:text-white transition-all">
+                <i class="fa-brands fa-windows mr-1.5 text-cyan-400"></i>Systèmes & AD
+            </button>
+            <button data-filter="reseaux" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:border-indigo-500/50 hover:text-white transition-all">
+                <i class="fa-solid fa-network-wired mr-1.5 text-indigo-400"></i>Réseaux & Commutation
+            </button>
+            <button data-filter="securite" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:border-emerald-500/50 hover:text-white transition-all">
+                <i class="fa-solid fa-shield-halved mr-1.5 text-emerald-400"></i>Haute Disp. & Sécurité
+            </button>
+            <button data-filter="support" class="filter-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-900/90 text-slate-300 border border-slate-700/80 hover:border-amber-500/50 hover:text-white transition-all">
+                <i class="fa-solid fa-screwdriver-wrench mr-1.5 text-amber-400"></i>Support, ERP & SAV
+            </button>
+        </div>
+
+        <!-- Grille des Cartes Projets -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+            <!-- Injecté via JavaScript -->
+        </div>
+    </section>
+
+    <!-- ==================== SECTION PARCOURS & VEILLE TECHNOLOGIQUE ==================== -->
+    <section id="parcours" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            <!-- Colonne Parcours Académique -->
+            <div class="lg:col-span-6 space-y-8">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-cyan-400 font-semibold">04 // Formation</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">Parcours Académique</h2>
+                </div>
+
+                <div class="relative pl-6 border-l-2 border-slate-800 space-y-8">
+                    <!-- Étape 1 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-cyan-500 ring-4 ring-slate-950"></span>
+                        <div class="glass-card rounded-2xl p-5">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-cyan-500/15 text-cyan-300 font-mono text-xs font-semibold">2025 – 2027</span>
+                                <span class="text-xs text-slate-400"><i class="fa-solid fa-location-dot mr-1 text-cyan-400"></i>Metz (57)</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">BTS SIO — Option SISR</h3>
+                            <p class="text-sm text-cyan-400 font-medium mb-2">Lycée Robert Schuman • Metz</p>
+                            <p class="text-xs sm:text-sm text-slate-400 leading-relaxed">
+                                Services Informatiques aux Organisations, spécialité Solutions d'Infrastructure, Systèmes et Réseaux. Administration systèmes Windows/Linux, commutation & routage Cisco/HP, virtualisation Hyper-V, cybersécurité et support technique.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Étape 2 -->
+                    <div class="relative">
+                        <span class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-600 ring-4 ring-slate-950"></span>
+                        <div class="glass-card rounded-2xl p-5">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 font-mono text-xs">Épreuves E5 / E6</span>
+                                <span class="text-xs text-slate-400">Référentiel National</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Validation des 6 Blocs de Compétences</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-1.5 leading-relaxed">
+                                • <strong>C1 à C3 :</strong> Patrimoine informatique, support aux incidents et développement de la présence en ligne.<br>
+                                • <strong>C4 à C6 :</strong> Mode projet, mise à disposition de services sécurisés et organisation du développement professionnel continu.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne Veille Technologique -->
+            <div class="lg:col-span-6 space-y-8">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold">05 // Veille & Sécurité</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white mt-2">Veille Technologique SISR</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="glass-card rounded-2xl p-5 border-l-4 border-l-cyan-500">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <span class="text-xs font-mono text-cyan-400">THÈME 01 • ZERO TRUST & SEGMENTATION</span>
+                                <h3 class="text-base sm:text-lg font-bold text-white mt-1">Micro-segmentation réseau & durcissement Active Directory</h3>
+                            </div>
+                            <i class="fa-solid fa-shield-virus text-cyan-400 text-xl mt-1"></i>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-2.5 leading-relaxed">
+                            Suivi des recommandations ANSSI sur le cloisonnement des flux (VLAN, ACL strictes), l'application du modèle Tiering sur Active Directory et la délégation AGDLP.
+                        </p>
+                    </div>
+
+                    <div class="glass-card rounded-2xl p-5 border-l-4 border-l-indigo-500">
+                        <div class="flex items-start justify-between gap-3">
+                            <div>
+                                <span class="text-xs font-mono text-indigo-400">THÈME 02 • HAUTE DISPONIBILITÉ & ERP</span>
+                                <h3 class="text-base sm:text-lg font-bold text-white mt-1">Continuité de service & automatisation des processus ERP</h3>
+                            </div>
+                            <i class="fa-solid fa-terminal text-indigo-400 text-xl mt-1"></i>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-400 mt-2.5 leading-relaxed">
+                            Étude des mécanismes de redondance de passerelle (HSRP), d'agrégation de liens (LACP) et d'intégration de progiciels de gestion intégrés (Dolibarr).
+                        </p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+                        <span><i class="fa-solid fa-rss text-amber-400 mr-2"></i>Sources : CERT-FR • ANSSI • IT-Connect</span>
+                        <span class="text-emerald-400">Actif 2025–2027</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== SECTION CONTACT ==================== -->
+    <section id="contact" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-slate-800/60">
+        <div class="glass-card rounded-3xl p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                <div class="lg:col-span-6 space-y-5">
+                    <span class="font-mono text-xs uppercase tracking-widest text-cyan-400 font-semibold">06 // Contact & Opportunités</span>
+                    <h2 class="text-2xl sm:text-4xl font-bold text-white">Échangeons sur vos projets d'infrastructure</h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Vous souhaitez consulter l'intégralité de mon dossier technique, échanger sur mon parcours en BTS SIO SISR au Lycée Robert Schuman de Metz ou discuter d'une opportunité professionnelle ? N'hésitez pas à me contacter.
+                    </p>
+
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-3.5 text-sm text-slate-300">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-cyan-400 border border-slate-700">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Formation</div>
+                                <div class="font-medium text-white">BTS SIO Option SISR — Lycée Robert Schuman, Metz</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3.5 text-sm text-slate-300">
+                            <div class="w-10 h-10 rounded-xl bg-slate-800 flex items-center justify-center text-cyan-400 border border-slate-700">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div>
+                                    <div class="text-xs text-slate-400">Email professionnel</div>
+                                    <div id="email-text" class="font-mono text-white">sofia.capar2@gmail.com</div>
+                                </div>
+                                <button onclick="copyEmail()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-cyan-500/20 text-xs text-cyan-400 border border-slate-700 hover:border-cyan-500/40 transition-colors" title="Copier l'adresse email">
+                                    <i class="fa-regular fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulaire interactif avec retour visuel sans alert() -->
+                <div class="lg:col-span-6">
+                    <form id="contact-form" class="bg-slate-950/80 p-6 rounded-2xl border border-slate-800 space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="sender-name" class="block text-xs font-medium text-slate-400 mb-1.5">Nom / Entreprise</label>
+                                <input type="text" id="sender-name" required placeholder="Ex: Jean Dupont" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500">
+                            </div>
+                            <div>
+                                <label for="sender-email" class="block text-xs font-medium text-slate-400 mb-1.5">Email</label>
+                                <input type="email" id="sender-email" required placeholder="contact@entreprise.fr" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="sender-subject" class="block text-xs font-medium text-slate-400 mb-1.5">Objet</label>
+                            <input type="text" id="sender-subject" required placeholder="Entretien / Dossier technique / Alternance..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500">
+                        </div>
+                        <div>
+                            <label for="sender-message" class="block text-xs font-medium text-slate-400 mb-1.5">Message</label>
+                            <textarea id="sender-message" rows="3" required placeholder="Votre message à l'attention de Sofia CAPAR..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold text-sm shadow-lg shadow-cyan-500/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Envoyer le message</span>
+                        </button>
+                        <div id="form-feedback" class="hidden p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs text-center">
+                            <i class="fa-solid fa-circle-check mr-1.5"></i>Votre message a bien été enregistré ! Sofia vous répondra rapidement à sofia.capar2@gmail.com.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="border-t border-slate-800/80 py-8 px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="font-mono">
+                &copy; 2025–2027 <span class="text-slate-300 font-semibold">Sofia CAPAR</span> — Portfolio BTS SIO SISR • Lycée Robert Schuman, Metz
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#accueil" class="hover:text-cyan-400 transition-colors">Haut de page <i class="fa-solid fa-arrow-up ml-1"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALE DÉTAILLÉE COMPTE-RENDU PROJET ==================== -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-md overflow-y-auto" role="dialog" aria-modal="true">
+        <div class="relative w-full max-w-4xl bg-slate-900 border border-slate-700 rounded-3xl shadow-2xl overflow-hidden my-auto max-h-[90vh] flex flex-col">
+            
+            <!-- En-tête de la Modale -->
+            <div class="px-6 py-5 bg-slate-950/90 border-b border-slate-800 flex items-start justify-between gap-4 shrink-0">
+                <div>
+                    <div class="flex flex-wrap items-center gap-2 mb-2">
+                        <span id="modal-category-badge" class="px-3 py-1 rounded-full text-xs font-semibold font-mono">Catégorie</span>
+                        <span id="modal-date" class="text-xs font-mono text-slate-400"><i class="fa-regular fa-calendar mr-1"></i>Date</span>
+                    </div>
+                    <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-white leading-snug">Titre du Projet</h3>
+                    <p id="modal-subtitle" class="text-xs sm:text-sm text-cyan-400 font-mono mt-1">Environnement / Matériel</p>
+                </div>
+                <button id="close-modal-btn" aria-label="Fermer la fenêtre" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 border border-slate-700 flex items-center justify-center transition-colors shrink-0">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Corps défilant de la Modale -->
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6 text-slate-300">
+                
+                <!-- Contexte & Objectifs -->
+                <div class="bg-slate-950/60 p-5 rounded-2xl border border-slate-800">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-cyan-400 font-mono mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-bullseye"></i> Contexte & Architecture cible
+                    </h4>
+                    <p id="modal-context" class="text-sm text-slate-300 leading-relaxed"></p>
+                </div>
+
+                <!-- Étapes Techniques Réalisées -->
+                <div>
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-white font-mono mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-emerald-400"></i> Étapes techniques & Réalisation
+                    </h4>
+                    <ul id="modal-steps" class="space-y-2.5 text-sm">
+                        <!-- Injecté via JS -->
+                    </ul>
+                </div>
+
+                <!-- Extraits de Configuration / Commandes Clés -->
+                <div>
+                    <div class="flex items-center justify-between mb-2.5">
+                        <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 font-mono flex items-center gap-2">
+                            <i class="fa-solid fa-terminal"></i> Extraits de configuration & Commandes clés
+                        </h4>
+                        <button id="copy-code-btn" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-mono text-cyan-300 border border-slate-700 flex items-center gap-1.5 transition-colors">
+                            <i class="fa-regular fa-copy"></i> <span id="copy-code-text">Copier</span>
+                        </button>
+                    </div>
+                    <pre class="bg-slate-950 p-4 rounded-2xl border border-slate-800 font-mono text-xs sm:text-sm text-emerald-300 overflow-x-auto leading-relaxed"><code id="modal-commands"></code></pre>
+                </div>
+
+                <!-- Technologies & Compétences BTS SIO validées -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                        <h5 class="text-xs font-mono uppercase text-slate-400 mb-2.5">Technologies & Protocoles</h5>
+                        <div id="modal-techs" class="flex flex-wrap gap-1.5"></div>
+                    </div>
+                    <div class="bg-slate-950/60 p-4 rounded-2xl border border-slate-800">
+                        <h5 class="text-xs font-mono uppercase text-slate-400 mb-2.5">Compétences BTS SIO SISR validées</h5>
+                        <ul id="modal-skills" class="space-y-1 text-xs text-slate-300"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pied de Modale -->
+            <div class="px-6 py-4 bg-slate-950/90 border-t border-slate-800 flex items-center justify-between shrink-0">
+                <span class="text-xs font-mono text-slate-500">Compte-rendu technique — Sofia CAPAR (2025-2027)</span>
+                <button id="close-modal-footer-btn" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-sm font-medium transition-colors">
+                    Fermer le compte-rendu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast légère -->
+    <div id="toast-notif" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl bg-slate-900 border border-cyan-500/50 text-cyan-300 text-xs font-mono shadow-2xl">
+        <i class="fa-solid fa-check-circle text-emerald-400"></i>
+        <span id="toast-message">Copié dans le presse-papiers !</span>
+    </div>
+
+    <!-- ==================== DONNÉES & LOGIQUE INTERACTIVE ==================== -->
+    <script>
+        /**
+         * Données issues du fichier de synthèse Excel (Projets 1 à 7, 21, 22, Dolibarr, SAV, Smartphone, Nettoyage PC, etc.)
+         * Inclut les validations pour les 6 compétences (C1 à C6).
+         */
+        const projectsData = [
+            {
+                id: 1,
+                title: "Projet 1 : Infrastructure Active Directory & Haute Disponibilité",
+                categories: ["systemes", "securite"],
+                categoryLabel: "Systèmes & Active Directory",
+                badgeStyle: "bg-cyan-500/15 text-cyan-300 border border-cyan-500/30",
+                icon: "fa-brands fa-windows",
+                date: "2025 – 2026",
+                environment: "Domaine : ecole.eni • DC1 : SIO1 (10.10.4.4) • DC2 (10.10.4.6)",
+                summary: "Déploiement d'un annuaire Active Directory multi-sites redondant avec Catalogue Global, automatisation PowerShell, délégation AGDLP et rôles FSMO.",
+                techs: ["Windows Server", "AD DS", "DNS", "GPO", "PowerShell", "FSMO", "AGDLP"],
+                competences: { C1: true, C2: true, C3: false, C4: true, C5: true, C6: true },
+                context: "Mise en place de l'infrastructure d'annuaire d'un établissement multi-sites sous le domaine ecole.eni. Tolérance de panne via second contrôleur, automatisation des comptes et sécurisation des partages.",
+                steps: [
+                    "Installation et promotion du contrôleur de domaine principal SIO1 (IP 10.10.4.4) avec rôles AD DS et DNS.",
+                    "Promotion d'un contrôleur de domaine secondaire avec Catalogue Global et DNS.",
+                    "Structuration logique par unités d'organisation (ASR, CDI, CAO, Multimédia, GPME).",
+                    "Automatisation PowerShell : création d'OU et importation CSV des utilisateurs.",
+                    "Application de la méthode AGDLP et GPO de redirection de dossiers.",
+                    "Audit de la réplication (repadmin) et transfert des rôles FSMO."
+                ],
+                commands: `# Vérification de la santé Active Directory
+repadmin /replsummary
+
+# Transfert des rôles FSMO
+Move-ADDirectoryServerOperationMasterRole -Identity "WIN-90AVH2EJMCU" -OperationMasterRole RIDMaster,PDCEmulator,InfrastructureMaster`,
+                skills: [
+                    "C1 : Gérer le patrimoine informatique (AD DS, serveurs)",
+                    "C4 : Travailler en mode projet (architecture multi-sites)",
+                    "C5 : Mettre à disposition un service informatique (annuaire, DNS)"
+                ]
+            },
+            {
+                id: 2,
+                title: "Projet 2 : Configuration & Sécurisation de Commutateurs L2",
+                categories: ["reseaux", "securite"],
+                categoryLabel: "Réseaux & Commutation",
+                badgeStyle: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30",
+                icon: "fa-solid fa-server",
+                date: "2025 – 2026",
+                environment: "Cisco SF300-08 • HP 2620-24 • PuTTY (Console/SSH)",
+                summary: "Mise en service console, création du VLAN d'administration 99 avec SVI, durcissement SSH/HTTPS, sécurité des ports (MAC statique) et sauvegarde TFTP.",
+                techs: ["Cisco IOS", "HP ProCurve", "VLAN 99", "SSHv2", "Port-Security", "TFTP"],
+                competences: { C1: true, C2: true, C3: false, C4: false, C5: true, C6: true },
+                context: "Initialisation et durcissement complet de commutateurs L2 Cisco et HP pour le cœur de réseau pédagogique. Suppression des protocoles en clair (Telnet/HTTP) et verrouillage physique.",
+                steps: [
+                    "Connexion console série RS-232 / USB (9600 bauds).",
+                    "Attribution des noms normés et chiffrement des mots de passe.",
+                    "Création du VLAN 99 de management et configuration SVI.",
+                    "Génération de clés RSA 1024 bits et activation de SSHv2 / HTTPS.",
+                    "Sécurisation des ports (Port-Security, MAC statique, shutdown ports inutilisés).",
+                    "Sauvegarde des fichiers de configuration sur serveur TFTP."
+                ],
+                commands: `! Configuration et sécurisation switch Cisco
+hostname S44CISCOF300
+ip domain-name CCNA-Lab.com
+crypto key generate rsa modulus 1024
+ip ssh version 2
+vlan 99
+ name MANAGEMENT
+interface vlan 99
+ ip address 10.10.4.243 255.255.255.0`,
+                skills: [
+                    "C1 : Gérer le patrimoine informatique (matériel réseau)",
+                    "C2 : Répondre aux incidents et demandes d'accès",
+                    "C5 : Mettre à disposition un service sécurisé"
+                ]
+            },
+            {
+                id: 3,
+                title: "Projet 3 : Segmentation Réseau par VLAN & Liens Trunk 802.1Q",
+                categories: ["reseaux"],
+                categoryLabel: "Réseaux & Commutation",
+                badgeStyle: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30",
+                icon: "fa-solid fa-diagram-project",
+                date: "2025 – 2026",
+                environment: "Cisco / HP • Hyper-V (VLAN ID) • Cisco Packet Tracer",
+                summary: "Cloisonnement d'un réseau d'entreprise en 6 VLANs métiers, configuration Trunk 802.1Q et intégration de VMs Windows 10 sous Hyper-V.",
+                techs: ["VLAN 802.1Q", "Trunking", "Hyper-V", "Packet Tracer"],
+                competences: { C1: true, C2: false, C3: false, C4: true, C5: true, C6: true },
+                context: "Isolation des domaines de diffusion en 6 VLANs (IT, SISR, SLAM, CYBER, COMNUM, Admin) et test sous Packet Tracer et Hyper-V.",
+                steps: [
+                    "Création des VLANs 10, 20, 30, 40, 50, 99.",
+                    "Configuration des ports d'accès (Access) et des liaisons inter-switchs en Trunk (Tagged 802.1Q).",
+                    "Intégration de machines virtuelles Hyper-V avec marquage VLAN ID.",
+                    "Validation des communications intra-VLAN."
+                ],
+                commands: `! VLANs et Trunk
+vlan 20
+ name SISR
+interface GigabitEthernet0/1
+ switchport trunk encapsulation dot1q
+ switchport mode trunk`,
+                skills: [
+                    "C1 : Gérer le patrimoine (architecture réseau)",
+                    "C4 : Travailler en mode projet"
+                ]
+            },
+            {
+                id: 4,
+                title: "Projet 4 : Routage Inter-VLAN (Router-on-a-Stick)",
+                categories: ["reseaux"],
+                categoryLabel: "Réseaux & Commutation",
+                badgeStyle: "bg-indigo-500/15 text-indigo-300 border border-indigo-500/30",
+                icon: "fa-solid fa-route",
+                date: "2025 – 2026",
+                environment: "Routeurs Cisco 1760 • 4 Commutateurs",
+                summary: "Interconnexion de 4 switchs et routage inter-VLAN via sous-interfaces dot1Q sur routeurs Cisco 1760.",
+                techs: ["Routeurs Cisco 1760", "Router-on-a-Stick", "dot1Q"],
+                competences: { C1: true, C2: false, C3: false, C4: true, C5: true, C6: true },
+                context: "Mise en place du routage inter-VLAN sur routeurs Cisco 1760 avec sous-interfaces logiques.",
+                steps: [
+                    "Activation de l'interface physique FastEthernet0/0.",
+                    "Création des sous-interfaces logiques Fa0/0.10 à Fa0/0.50.",
+                    "Encapsulation dot1Q et attribution des passerelles.",
+                    "Sécurisation des accès routeur et tests de routage."
+                ],
+                commands: `interface FastEthernet0/0.20
+ encapsulation dot1Q 20
+ ip address 10.20.4.254 255.255.255.0`,
+                skills: [
+                    "C1 : Gérer le patrimoine réseau",
+                    "C5 : Mettre à disposition le service de routage"
+                ]
+            },
+            {
+                id: 5,
+                title: "Projet 5 & 21 : Haute Disponibilité, Wi-Fi & Filtrage ACL",
+                categories: ["securite", "reseaux"],
+                categoryLabel: "Haute Disp. & Sécurité",
+                badgeStyle: "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30",
+                icon: "fa-solid fa-shield-halved",
+                date: "2025 – 2026",
+                environment: "Routeurs R41/R42 • Switchs • Borne Wi-Fi HP V-M200",
+                summary: "Architecture tolérante aux pannes : STP/RSTP (Root Bridge), agrégation LACP, redondance HSRP, relais DHCP, Wi-Fi sécurisé et ACL étendues.",
+                techs: ["STP", "LACP", "HSRP", "ACL Étendues", "Wi-Fi HP V-M200"],
+                competences: { C1: true, C2: true, C3: false, C4: true, C5: true, C6: true },
+                context: "Projet de synthèse sans SPOF (Single Point of Failure) avec politiques de sécurité sur les flux inter-VLAN et Wi-Fi.",
+                steps: [
+                    "Configuration STP avec élection Root Bridge (priorité 4096).",
+                    "Agrégation de liens LACP (Port-Channel).",
+                    "Redondance HSRP (R41 actif, R42 standby) avec relais DHCP.",
+                    "Déploiement et sécurisation de la borne Wi-Fi HP V-M200.",
+                    "Mise en place d'ACL étendues (120 à 150) pour le cloisonnement des flux."
+                ],
+                commands: `standby 1 ip 10.10.4.254
+standby 1 priority 200
+standby 1 preempt
+access-list 120 permit udp any any eq bootps`,
+                skills: [
+                    "C1 : Gérer le patrimoine d'infrastructure",
+                    "C5 : Mettre à disposition des services haute disponibilité",
+                    "C6 : Organiser son développement professionnel"
+                ]
+            },
+            {
+                id: 6,
+                title: "Projet 6 : Inventaire & Gestion de Parc (OCS Inventory & GLPI)",
+                categories: ["support", "systemes"],
+                categoryLabel: "Support, ERP & SAV",
+                badgeStyle: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+                icon: "fa-solid fa-boxes-stacked",
+                date: "2025 – 2026",
+                environment: "Hyper-V • Windows Server 2016 • XAMPP • GLPI / OCS",
+                summary: "Déploiement d'un serveur OCS Inventory NG et GLPI sous XAMPP pour l'inventaire automatisé du parc informatique et le suivi des tickets ITSM.",
+                techs: ["OCS Inventory NG", "GLPI", "XAMPP", "Hyper-V", ".htaccess"],
+                competences: { C1: true, C2: true, C3: false, C4: true, C5: true, C6: true },
+                context: "Mise en place d'une solution open-source d'inventaire et de gestion de tickets pour le support technique.",
+                steps: [
+                    "Création d'un réseau isolé Hyper-V.",
+                    "Installation de XAMPP, Apache, MariaDB et déploiement d'OCS Inventory.",
+                    "Sécurisation des accès (mots de passe forts, .htaccess).",
+                    "Installation des agents OCS sur postes clients Windows 10."
+                ],
+                commands: `# Exécution de l'agent OCS
+"C:\\Program Files\\OCS Inventory Agent\\OCSInventory.exe" /SERVER=http://192.168.168.10/ocsinventory /FORCE`,
+                skills: [
+                    "C1 : Gérer le patrimoine informatique (inventaire)",
+                    "C2 : Répondre aux demandes et incidents (GLPI)"
+                ]
+            },
+            {
+                id: 7,
+                title: "Projet 7 & 22 : Web & Présence en Ligne (Portfolio & SEO)",
+                categories: ["support"],
+                categoryLabel: "Support, ERP & SAV",
+                badgeStyle: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+                icon: "fa-solid fa-globe",
+                date: "2025 – 2027",
+                environment: "HTML5 / Tailwind CSS • JavaScript • Référencement Web",
+                summary: "Conception, développement et optimisation du portfolio professionnel et des outils de visibilité en ligne de l'organisation.",
+                techs: ["HTML5", "Tailwind CSS", "JavaScript", "SEO / Web Marketing"],
+                competences: { C1: false, C2: false, C3: true, C4: true, C5: true, C6: true },
+                context: "Développement de la présence en ligne et vitrine numérique des compétences en BTS SIO option SISR.",
+                steps: [
+                    "Design responsive et ergonomique orienté cybersécurité.",
+                    "Intégration du tableau de synthèse E5/E6 et modales interactives.",
+                    "Optimisation du référencement web et structure sémantique."
+                ],
+                commands: `<!-- Structure responsive Tailwind CSS -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">`,
+                skills: [
+                    "C3 : Développer la présence en ligne de l'organisation",
+                    "C4 : Travailler en mode projet",
+                    "C6 : Organiser son développement professionnel"
+                ]
+            },
+            {
+                id: 8,
+                title: "Expérience Pro : Implémentation & Gestion ERP Dolibarr",
+                categories: ["support"],
+                categoryLabel: "Support, ERP & SAV",
+                badgeStyle: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+                icon: "fa-solid fa-coins",
+                date: "2025 – 2026",
+                environment: "Dolibarr ERP/CRM • MySQL • PHP • Serveur Web",
+                summary: "Déploiement et paramétrage d'un progiciel de gestion intégré (Dolibarr) pour la gestion commerciale, comptable et le suivi des stocks.",
+                techs: ["Dolibarr", "MySQL", "PHP", "Gestion commerciale"],
+                competences: { C1: true, C2: true, C3: true, C4: true, C5: true, C6: true },
+                context: "Mise en œuvre d'un ERP open-source pour centraliser la gestion d'entreprise et optimiser les flux administratifs.",
+                steps: [
+                    "Installation et configuration de Dolibarr sur serveur web.",
+                    "Paramétrage des modules (Tiers, Facturation, Stocks, Banques).",
+                    "Création des utilisateurs et attribution des rôles et habilitations."
+                ],
+                commands: `# Configuration modules Dolibarr ERP
+$dolibarr_main_db_name='dolibarr';
+$dolibarr_main_db_user='root';`,
+                skills: [
+                    "C1 : Gérer le patrimoine (progiciels métiers)",
+                    "C5 : Mettre à disposition un service informatique métier",
+                    "C6 : Organiser son développement professionnel"
+                ]
+            },
+            {
+                id: 9,
+                title: "Expérience Pro : Réparation de Smartphones & Maintenance Hardware",
+                categories: ["support"],
+                categoryLabel: "Support, ERP & SAV",
+                badgeStyle: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+                icon: "fa-solid fa-mobile-screen-button",
+                date: "2025 – 2026",
+                environment: "Atelier Hardware • Outils de précision • Diagnostic CMS",
+                summary: "Diagnostic de pannes matérielles, remplacement d'écrans, de batteries et de composants sur terminaux mobiles (smartphones / tablettes).",
+                techs: ["Hardware", "Diagnostic CMS", "Soudure de précision", "Maintenance"],
+                competences: { C1: true, C2: true, C3: false, C4: false, C5: true, C6: true },
+                context: "Intervention en atelier de support matériel sur terminaux mobiles dans le cadre des activités de maintenance curative.",
+                steps: [
+                    "Diagnostic de pannes matérielles et logicielles (batterie, écran, connecteur de charge).",
+                    "Démontage minutieux, remplacement des composants défectueux et tests de bon fonctionnement.",
+                    "Traçabilité des interventions dans l'outil de SAV."
+                ],
+                commands: `# Check-list diagnostic matériel mobile
+1. Test tactile & affichage LCD/OLED
+2. Vérification tension batterie (Multimètre)
+3. Test connectique USB-C / Lightning`,
+                skills: [
+                    "C1 : Gérer le patrimoine informatique (composants matériels)",
+                    "C2 : Répondre aux incidents et demandes d'assistance (SAV)",
+                    "C5 : Mettre à disposition un service de réparation"
+                ]
+            },
+            {
+                id: 10,
+                title: "Expérience Pro : Nettoyage PC, Dépoussiérage & Analyse SAV",
+                categories: ["support"],
+                categoryLabel: "Support, ERP & SAV",
+                badgeStyle: "bg-amber-500/15 text-amber-300 border border-amber-500/30",
+                icon: "fa-solid fa-computer",
+                date: "2025 – 2027",
+                environment: "Atelier SIO • Dépoussiérage air comprimé • Gestion de tickets SAV",
+                summary: "Maintenance préventive et curative des postes de travail : nettoyage physique, changement de pâte thermique, élimination des malwares et analyse de tickets SAV.",
+                techs: ["Maintenance préventive", "Pâte thermique", "Antivirus / Anti-malware", "Tickets SAV"],
+                competences: { C1: true, C2: true, C3: false, C4: false, C5: true, C6: true },
+                context: "Assistance technique aux utilisateurs, dépoussiérage de parcs de PC fixes/portables et traitement des incidents de niveau 1 et 2.",
+                steps: [
+                    "Démontage des unités centrales et ordinateurs portables pour nettoyage complet (soufflette air comprimé).",
+                    "Remplacement de la pâte thermique processeur pour l'optimisation thermique.",
+                    "Analyse et résolution des tickets de support SAV (incidents logiciels et matériels)."
+                ],
+                commands: `# Diagnostic système post-nettoyage
+sfc /scannow
+DISM /Online /Cleanup-Image /RestoreHealth`,
+                skills: [
+                    "C1 : Gérer le patrimoine informatique (parc micro-ordinateurs)",
+                    "C2 : Répondre aux incidents et demandes d'assistance (support)",
+                    "C5 : Mettre à disposition des postes opérationnels"
+                ]
+            }
+        ];
+
+        /**
+         * Rendu du tableau officiel de synthèse des compétences E5 / E6
+         */
+        function renderSynthesisTable(filterComp = 'all') {
+            const tbody = document.getElementById('synthesis-table-body');
+            tbody.innerHTML = '';
+
+            projectsData.forEach(p => {
+                // Si un filtre de compétence est actif et que le projet ne valide pas cette compétence, on passe
+                if (filterComp !== 'all' && !p.competences[filterComp]) {
+                    return;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-900/60 transition-colors';
+
+                const renderCheck = (hasValid) => hasValid 
+                    ? `<td class="p-4 text-center border-l border-slate-800"><i class="fa-solid fa-circle-check text-emerald-400 text-base" title="Validé"></i></td>`
+                    : `<td class="p-4 text-center border-l border-slate-800 text-slate-700">-</td>`;
+
+                tr.innerHTML = `
+                    <td class="p-4 font-medium text-white flex items-center gap-2.5">
+                        <i class="${p.icon} text-cyan-400 shrink-0"></i>
+                        <span>${p.title}</span>
+                    </td>
+                    ${renderCheck(p.competences.C1)}
+                    ${renderCheck(p.competences.C2)}
+                    ${renderCheck(p.competences.C3)}
+                    ${renderCheck(p.competences.C4)}
+                    ${renderCheck(p.competences.C5)}
+                    ${renderCheck(p.competences.C6)}
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Écouteurs pour les filtres du tableau
+        const tableFilterBtns = document.querySelectorAll('.table-filter-btn');
+        tableFilterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tableFilterBtns.forEach(b => {
+                    b.classList.remove('bg-emerald-500', 'text-slate-950', 'font-semibold');
+                    b.classList.add('bg-slate-800', 'text-slate-300', 'font-medium');
+                });
+                btn.classList.remove('bg-slate-800', 'text-slate-300', 'font-medium');
+                btn.classList.add('bg-emerald-500', 'text-slate-950', 'font-semibold');
+
+                const comp = btn.getAttribute('data-comp');
+                renderSynthesisTable(comp);
+            });
+        });
+
+        /**
+         * Génère et affiche les cartes projets selon le filtre actif
+         */
+        function renderProjects(filter = 'all') {
+            projectsGrid.innerHTML = '';
+
+            const filtered = filter === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.categories.includes(filter));
+
+            projectCountEl.textContent = filtered.length;
+
+            filtered.forEach((project, index) => {
+                const card = document.createElement('article');
+                card.className = 'glass-card rounded-2xl p-6 flex flex-col justify-between animate-card';
+                card.style.animationDelay = `${index * 50}ms`;
+
+                const visibleTechs = project.techs.slice(0, 4).map(tech => 
+                    `<span class="px-2.5 py-1 rounded-md bg-slate-900/90 border border-slate-700/80 text-slate-300 font-mono text-[11px]">${tech}</span>`
+                ).join('');
+                
+                const extraTechCount = project.techs.length > 4 
+                    ? `<span class="px-2 py-1 rounded-md bg-slate-800/80 text-cyan-400 font-mono text-[11px]">+${project.techs.length - 4}</span>` 
+                    : '';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-semibold font-mono ${project.badgeStyle}">
+                                <i class="${project.icon} mr-1.5"></i>${project.categoryLabel}
+                            </span>
+                            <span class="text-xs font-mono text-slate-400">${project.date}</span>
+                        </div>
+
+                        <h3 class="text-lg sm:text-xl font-bold text-white leading-snug mb-2 group-hover:text-cyan-400 transition-colors">
+                            ${project.title}
+                        </h3>
+                        <p class="text-xs font-mono text-cyan-400/90 mb-3 truncate" title="${project.environment}">
+                            <i class="fa-solid fa-microchip mr-1.5 text-slate-500"></i>${project.environment}
+                        </p>
+
+                        <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-5">
+                            ${project.summary}
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-800/80 space-y-4">
+                        <div class="flex flex-wrap gap-1.5">
+                            ${visibleTechs}
+                            ${extraTechCount}
+                        </div>
+
+                        <button onclick="openProjectModal(${project.id})" class="w-full py-2.5 px-4 rounded-xl bg-slate-800/90 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-blue-600 text-cyan-300 hover:text-white border border-cyan-500/30 hover:border-transparent font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-file-code"></i>
+                            <span>Voir le détail / Compte-rendu</span>
+                        </button>
+                    </div>
+                `;
+
+                projectsGrid.appendChild(card);
+            });
+        }
+
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-cyan-500', 'text-slate-950', 'font-semibold', 'shadow-lg', 'shadow-cyan-500/25');
+                    b.classList.add('bg-slate-900/90', 'text-slate-300', 'font-medium', 'border', 'border-slate-700/80');
+                });
+
+                btn.classList.remove('bg-slate-900/90', 'text-slate-300', 'font-medium', 'border', 'border-slate-700/80');
+                btn.classList.add('bg-cyan-500', 'text-slate-950', 'font-semibold', 'shadow-lg', 'shadow-cyan-500/25');
+
+                const selectedFilter = btn.getAttribute('data-filter');
+                renderProjects(selectedFilter);
+            });
+        });
+
+        // Modale
+        const modal = document.getElementById('project-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const closeModalFooterBtn = document.getElementById('close-modal-footer-btn');
+        const copyCodeBtn = document.getElementById('copy-code-btn');
+        const copyCodeText = document.getElementById('copy-code-text');
+        let currentModalCommands = "";
+
+        function openProjectModal(projectId) {
+            const project = projectsData.find(p => p.id === projectId);
+            if (!project) return;
+
+            document.getElementById('modal-category-badge').className = `px-3 py-1 rounded-full text-xs font-semibold font-mono ${project.badgeStyle}`;
+            document.getElementById('modal-category-badge').innerHTML = `<i class="${project.icon} mr-1.5"></i>${project.categoryLabel}`;
+            document.getElementById('modal-date').innerHTML = `<i class="fa-regular fa-calendar mr-1"></i>${project.date}`;
+            document.getElementById('modal-title').textContent = project.title;
+            document.getElementById('modal-subtitle').textContent = project.environment;
+            document.getElementById('modal-context').textContent = project.context;
+
+            const stepsContainer = document.getElementById('modal-steps');
+            stepsContainer.innerHTML = project.steps.map((step, i) => `
+                <li class="flex items-start gap-3 bg-slate-950/40 p-3 rounded-xl border border-slate-800/60">
+                    <span class="w-6 h-6 rounded-lg bg-cyan-500/15 text-cyan-400 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
+                    <span class="text-slate-300 leading-relaxed">${step}</span>
+                </li>
+            `).join('');
+
+            currentModalCommands = project.commands;
+            document.getElementById('modal-commands').textContent = project.commands;
+            copyCodeText.textContent = "Copier";
+
+            document.getElementById('modal-techs').innerHTML = project.techs.map(t => 
+                `<span class="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-cyan-300 font-mono text-xs">${t}</span>`
+            ).join('');
+
+            document.getElementById('modal-skills').innerHTML = project.skills.map(s => 
+                `<li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i><span>${s}</span></li>`
+            ).join('');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjectModal() {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        closeModalBtn.addEventListener('click', closeProjectModal);
+        closeModalFooterBtn.addEventListener('click', closeProjectModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeProjectModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeProjectModal();
+            }
+        });
+
+        function copyToClipboardFallback(text, feedbackCallback) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                if (feedbackCallback) feedbackCallback();
+            } catch (err) {
+                console.error('Erreur lors de la copie :', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notif');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 2800);
+        }
+
+        copyCodeBtn.addEventListener('click', () => {
+            copyToClipboardFallback(currentModalCommands, () => {
+                copyCodeText.textContent = "Copié !";
+                showToast("Extrait de configuration copié !");
+                setTimeout(() => { copyCodeText.textContent = "Copier"; }, 2000);
+            });
+        });
+
+        function copyEmail() {
+            const email = document.getElementById('email-text').textContent;
+            copyToClipboardFallback(email, () => {
+                showToast("Adresse email copiée : " + email);
+            });
+        }
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const feedback = document.getElementById('form-feedback');
+            feedback.classList.remove('hidden');
+            e.target.reset();
+            setTimeout(() => {
+                feedback.classList.add('hidden');
+            }, 5000);
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProjects('all');
+            renderSynthesisTable('all');
+        });
+    </script>
+</body>
+</html>
